@@ -75,7 +75,7 @@ public class Level1 {
     }
 
     public static void main(String[] args) {
-        System.out.println(numberofsteps(14));
+        System.out.println(count_zeroes(1002000504));
     }
 }
 
