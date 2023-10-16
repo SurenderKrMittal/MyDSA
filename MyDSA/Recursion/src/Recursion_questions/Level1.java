@@ -46,15 +46,18 @@ public class Level1 {
         return false;
     }
 
-    static int count_zeroes(int n , int count) {
+    static int count_zeroes(int n) {
+        return helper_count_zeroes(n , 0); // helper function is created because we need to  pass the count(0) as an argument
+    }                                           // to the recursion calls.
+
+    static int helper_count_zeroes(int n , int count) {
         if(n == 0) {
             return count;
         }
         if (n % 10 == 0) {
-            return count_zeroes(n / 10 , count + 1);
-        } else {
-            return count_zeroes(n / 10 , count);
+            return helper_count_zeroes(n / 10 , count + 1);
         }
+        return helper_count_zeroes(n / 10 , count);
     }
 
     static int numberofsteps(int n) {
@@ -72,7 +75,7 @@ public class Level1 {
     }
 
     public static void main(String[] args) {
-        System.out.println(numberofsteps(14));
+        System.out.println(count_zeroes(102021004));
     }
 }
 
