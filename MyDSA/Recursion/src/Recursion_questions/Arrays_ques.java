@@ -90,6 +90,6 @@ public class Arrays_ques {
     public static void main(String[] args) {
         int[] arr = {1 , 2 , 3 , 3 , 3 , 4 , 5};
         ArrayList<Integer> ans = find_all_indexes_3(arr , 3 , 0); 
-        System.out.println(ans);
+        System.out.println(ans); 
     }
 }
