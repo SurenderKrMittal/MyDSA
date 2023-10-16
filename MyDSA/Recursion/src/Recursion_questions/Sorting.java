@@ -21,7 +21,7 @@ public class Sorting {
     }
 
     static void selection_sort(int[] arr , int max_indx , int n , int i) {
-        if (n == 0) {
+        if (n == 1) {
             return;
         }
         if (i < n) {
@@ -30,8 +30,8 @@ public class Sorting {
             }
             selection_sort(arr, max_indx, n, i + 1);
         } else {
-            int temp = arr[n];
-            arr[n] = arr[max_indx];
+            int temp = arr[n - 1];
+            arr[n - 1] = arr[max_indx];
             arr[max_indx] = temp;
             selection_sort(arr, 0, n - 1, 0);
         }
