@@ -9,7 +9,7 @@ public class Sorting {
             return;
         }
         if (i < n) {
-            if (arr[i] > arr[i + 1]) {
+            if (arr[i] > arr[i + 1]) { // here we will take n as arr.length - 1 to avoid index out of bounds error
                 int temp = arr[i];
                 arr[i] = arr[i + 1];
                 arr[i + 1] = temp;   
@@ -25,7 +25,7 @@ public class Sorting {
             return;
         }
         if (i < n) {
-            if (arr[i] > arr[max_indx]) {
+            if (arr[i] > arr[max_indx]) { // here we will take n as arr.length to include last index 
                 max_indx = i;
             }
             selection_sort(arr, max_indx, n, i + 1);
@@ -39,7 +39,7 @@ public class Sorting {
 
     public static void main(String[] args) {
         int[] arr = {4 , 13, 2 ,10};
-        selection_sort(arr , 0, arr.length - 1, 0);
+        selection_sort(arr , 0, arr.length, 0);
         System.out.println(Arrays.toString(arr));
     }
 }
