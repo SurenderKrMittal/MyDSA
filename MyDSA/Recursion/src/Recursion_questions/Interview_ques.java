@@ -137,8 +137,18 @@ public class Interview_ques {
         return ans;
     }
 
+    // tower of hanoi
+    static void toh(int n , char src , char help , char dest) {
+        if (n == 1) {
+            System.out.println("move disk " + n + " from " + src + " to " + dest);
+            return;
+        }
+        toh(n - 1, src, dest, help);
+        System.out.println("move disk " + n + " from " + src + " to " + dest);
+        toh(n - 1, help, src, dest);
+    }
+
     public static void main(String[] args) {
-        System.out.println(letterCombinations("", "23"));
-        // dice("", 4);
+        toh(4, 'A', 'B', 'C');
     }
 }

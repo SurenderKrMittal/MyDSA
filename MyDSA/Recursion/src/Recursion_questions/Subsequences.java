@@ -65,7 +65,7 @@ public class Subsequences {
         all_subseq_ascii(p, up.substring(1));
     }
 
-    // store all possible subsets of a string in arraylist
+    // store all possible subsets with ascii value of a string in arraylist
     static ArrayList<String> all_subseq_list_ascii(String p , String up) {
         if (up.isEmpty()) {
             ArrayList<String> list = new ArrayList<>();
@@ -81,10 +81,29 @@ public class Subsequences {
         return first;
     }
 
+    // count the no of substrings that start and end with the same character
+    static int count_sub(String str) {
+        if (str.isEmpty()) {
+            return 0;
+        }
+        int count = 0;
+        for (int i = 1; i <= str.length(); i++) {
+            String a = str.substring(0 , i);
+            if (a.endsWith(a.substring(0 , 1))) {
+                count += 1;
+            }
+        }
+        count += count_sub(str.substring(1));
+        return count;
+    }
+    // instead of using for loop you can also make a helper recursive function that gives the count of substrings for that particular
+    // str . You can also take a static count outside the function or you can take it in argument.
+
     public static void main(String[] args) {
         //System.out.println(all_subseq_list_ascii("","abcd"));
         // all_subseq_ascii("","abcd");\
-        ArrayList<String> i = new ArrayList<>();
-        System.out.println(all_subseq_list_2("", "abc" , i));
+        // ArrayList<String> i = new ArrayList<>();
+        // System.out.println(all_subseq_list_2("", "abc" , i));
+        System.out.println(count_sub("abcab"));
     }
 }

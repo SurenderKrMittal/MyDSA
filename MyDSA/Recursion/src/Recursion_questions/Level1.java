@@ -74,8 +74,41 @@ public class Level1 {
         return helper_steps(n - 1 , count + 1);
     }
 
+    // For a given integer array of siz eN.You have to find all the occurrences (indices) of a given element (Key) and print them
+    static void occur(int[] arr , int key , int i) {
+        if (i >= arr.length) {
+            return;
+        }
+        if (arr[i] == key) {
+            System.out.println(i);
+        }
+        occur(arr, key, i + 1);
+    }
+
+    // You are given a number (eg -  2019), convert it into a String of english "two zero one nine"
+    static String[] digits =  {"zero" , "one" , "two" , " three" , "four" , "five" , "six" , "seven" , "eight" , "nine"};
+    static String convert(int n) {
+        if (n == 0) {
+            return "";
+        }
+        int digit = n % 10;
+        String ch = digits[digit];
+        String a = convert(n / 10);
+        return a + ch + " ";
+    }
+
+    // length of a string
+    static int length(String str) {
+        if (str.isEmpty()) {
+            return 0;
+        }
+        int count = 1;
+        count += length(str.substring(1));
+        return count;
+    }
+
     public static void main(String[] args) {
-        System.out.println(count_zeroes(1002000504));
+        System.out.println(length( "sbc"));
     }
 }
 
