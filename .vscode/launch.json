@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "Ques",
+            "request": "launch",
+            "mainClass": "Divide_and_Conquer.Ques",
+            "projectName": "MyDSA_78baf3a4"
+        },
+        {
             "name": "Java",
             "type": "java",
             "request": "launch",
