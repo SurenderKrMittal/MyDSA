@@ -18,6 +18,19 @@ public class Permutation_ques {
         }
     }
 
+    // another method for printing all permutation
+    static void print_permu(String p , String up) {
+        if (up.isEmpty()) {
+            System.out.println(p);
+            return;
+        }
+        for (int i = 0; i < up.length(); i++) {
+            char ch = up.charAt(i);
+            print_permu(p + ch, up.substring(0, i) + up.substring(i + 1));
+
+        }
+    }
+
     // store all permutations in arraylist
     static ArrayList<String> ques_a(String p ,String up) {
         if (up.isEmpty()) {
@@ -66,6 +79,7 @@ public class Permutation_ques {
     }
 
     public static void main(String[] args) {
-        System.out.println(ques_counta("", "abcd" , 0));
+        // System.out.println(ques_counta("", "abcd" , 0));
+        print_permu("", "abc");
     }
 }
