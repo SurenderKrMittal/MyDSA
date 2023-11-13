@@ -46,13 +46,15 @@ public class Subsets {
         }
         return outer;
     }
-
+    
     public static void main(String[] args) {
         int[] arr = {1 , 2 , 3};
-        //List<List<Integer>> ans = subset(arr);
+        // List<List<Integer>> ans = subset(arr);
         List<List<Integer>> ans = subset_duplicate(arr);
         for (List<Integer> list : ans) {
             System.out.println(list);
         }
+        
     }
+    
 }
