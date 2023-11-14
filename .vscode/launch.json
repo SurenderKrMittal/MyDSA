@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Basic",
+            "request": "launch",
+            "mainClass": "MyDSA.backtracking.Basic",
+            "projectName": "MyDSA_78baf3a4"
+        },
+        {
+            "type": "java",
             "name": "Ques",
             "request": "launch",
             "mainClass": "Divide_and_Conquer.Ques",
