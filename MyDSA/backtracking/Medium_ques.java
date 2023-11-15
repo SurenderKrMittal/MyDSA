@@ -15,17 +15,17 @@ public class Medium_ques {
     }
 
     static boolean isSafe(char[][] board, int row, int col) {
-        for (int i = row; i >= 0; i--) {  // checking upper vertical part of board
+        for (int i = row - 1; i >= 0; i--) {  // checking upper vertical part of board
             if (board[i][col] == 'Q') {
                 return false;
             }
         }
-        for (int i = row , j = col; i >= 0 && j >= 0; i-- , j--) { // checking the upper left diagnol
+        for (int i = row - 1 , j = col - 1; i >= 0 && j >= 0; i-- , j--) { // checking the upper left diagnol
             if (board[i][j] == 'Q') {
                 return false;
             }
         }
-        for (int i = row , j = col; i >= 0 && j < board[0].length; i-- , j++) { // checking the upper right diagnol
+        for (int i = row - 1, j = col + 1; i >= 0 && j < board[0].length; i-- , j++) { // checking the upper right diagnol
             if (board[i][j] == 'Q') {
                 return false;
             }
@@ -80,19 +80,68 @@ public class Medium_ques {
         return false;
     }
 
+    static boolean isSafe1 (char[][] board , int row , int col) { // checks for moves of knight(ghoda)
+        if(isValid(board, row - 2, col - 1)){
+            if (board[row - 2][col - 1] == 'K'){ 
+                return false;
+            }
+        }
+        if(isValid(board, row - 2, col + 1)){
+            if (board[row - 2][col + 1] == 'K'){ 
+                return false;
+            }
+        }
+        if(isValid(board, row - 1, col - 2)){
+            if (board[row - 1][col - 2] == 'K'){ 
+                return false;
+            }
+        }
+        if(isValid(board, row - 1, col + 2)){
+            if (board[row - 1][col + 2] == 'K'){ 
+                return false;
+            }
+        }
+        return true;
+    }
+
+    static boolean isValid(char[][] board , int row , int col) {
+        if (row >= 0 && row < board.length && col >= 0 && col < board[0].length) {
+            return true;
+        }
+        return false;
+    }
+
+    // n knights problem
+    static void nKnights(char[][] board , int row , int col , int knights) {
+        if (knights == 0) {
+            print_matrix(board);
+            return;
+        }
+        if (row == board.length) {
+            return;
+        }
+        int nextRow = row;
+        int nextCol = col + 1;
+        if (nextCol == board.length) {
+            nextRow ++;
+            nextCol = 0;
+        }  
+        if(isSafe1(board , row , col)) {
+            board[row][col] = 'K';
+            nKnights(board, nextRow, nextCol, knights - 1);
+            board[row][col] = 'X';
+        }
+        nKnights(board, nextRow, nextCol, knights);
+    }
+
     public static void main(String[] args) {
-        int n = 3;
+        int n = 2;
         char[][] board = new char[n][n];
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
-                board[i][j] = 'x';
+                board[i][j] = 'X';
             }
         }
-        if(nQueens2(board, 0)){
-            System.out.println("Solution Exists");
-            print_matrix(board);
-        }else{
-            System.out.println("No Solution Exists");
-        }
+        nKnights(board, 0 , 0 , n);
     }
 }
