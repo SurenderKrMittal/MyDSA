@@ -151,17 +151,66 @@ public class Basic {
         matrix[r][c] = 0;
     }
 
+    static void print_matrix(int[][] board) {
+        for (int i = 0; i < board.length; i++) {
+            System.out.print(Arrays.toString(board[i]));
+            System.out.println();
+        }
+    }
+
+    // rat in a maze problem
+    static void rat_maze (int[][] maze , int row , int col , int[][] ans , String p) {
+        if (row == maze.length - 1 && col == maze[0].length - 1) {
+            ans[row][col] = 1;
+            print_matrix(ans);
+            System.out.println(p);
+            return;
+        }
+        if (maze[row][col] == 0) {
+            return;
+        }
+        maze[row][col] = 0;
+        ans[row][col] = 1;
+        if (row > 0) { // up
+            rat_maze(maze, row - 1, col, ans , p + 'U');
+        }
+        if (row < maze.length - 1) { // down
+            rat_maze(maze, row + 1, col, ans , p + 'D');
+        }
+        if (col > 0) { // left 
+            rat_maze(maze, row, col - 1, ans , p + 'L');
+        }
+        if (col < maze[0].length - 1) { // right
+            rat_maze(maze, row, col + 1, ans , p + 'R');
+        }
+        maze[row][col] = 1;
+        ans[row][col] = 0;
+    }
+
     public static void main(String[] args) {
         // int[] arr = new int[5];
         // change_array(arr, 0);
         // System.out.println(Arrays.toString(arr));
         // System.out.println(count_ways(3 , 3));
-        boolean[][] arr = {
-            {true, true , true},
-                {true, true , true},
-                {true , true , true}
+        // boolean[][] arr = {
+        //     {true, true , true},
+        //         {true, true , true},
+        //         {true , true , true}
+        // };
+        // int[][] matrix = new int[3][3];
+        // print_all_ways_matrix(arr ,"", 0, 0 , matrix , 1);
+        int[][] maze = {
+            {1 , 0 , 0 , 0},
+            {1 , 1 , 0 , 1},
+            {0 , 1 , 0 , 0},
+            {1 , 1 , 1 , 1}
         };
-        int[][] matrix = new int[3][3];
-        print_all_ways_matrix(arr ,"", 0, 0 , matrix , 1);
+        int[][] ans = {
+            {0 , 0 , 0 , 0},
+            {0 , 0 , 0 , 0},
+            {0 , 0 , 0 , 0},
+            {0 , 0 , 0 , 0}
+        };
+        rat_maze(maze, 0, 0, ans , "");
     }
 }

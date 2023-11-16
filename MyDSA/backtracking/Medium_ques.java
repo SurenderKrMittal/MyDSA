@@ -158,16 +158,72 @@ public class Medium_ques {
         nKnights_count(board, nextRow, nextCol, knights);
     }
 
+    static boolean isSafe_tour (int[][] board , int row , int col) {
+        if (isValid_tour(board, row, col)) {
+            if (board[row][col] != 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    static boolean isValid_tour(int[][] board , int row , int col) {
+        if(row >= 0 && row < board.length && col >= 0 && col < board[0].length){
+            return true;
+        }
+        return false;
+    }
+
+    // knight's tour
+    static boolean tour(int[][] board , int row , int col) {
+        if (!((isSafe_tour(board , row + 2, col + 1)) || (isSafe_tour(board , row + 2, col - 1)) || (isSafe_tour(board , row + 1, col + 2)) || (isSafe_tour(board , row - 1, col + 2)) || (isSafe_tour(board , row - 2, col + 1)) || (isSafe_tour(board , row - 2, col - 1)) || (isSafe_tour(board , row - 1, col - 2)) || (isSafe_tour(board , row - 2, col + 1)))) {
+             System.out.println("( " + row + " , " + col + " )");
+            return true;
+        }
+        if (board[row][col] == 0) {
+            return false;
+        }
+        System.out.println("( " + row + " , " + col + " )");
+        board[row][col] = 0;
+        if (isSafe_tour(board , row + 2, col + 1)) { // down
+            return tour(board, row + 2, col + 1);
+        }
+        if (isSafe_tour(board , row + 2, col - 1)) { // down
+            return tour(board, row + 2, col - 1);
+        }
+        if (isSafe_tour(board , row + 1, col + 2)) { // right
+            return tour(board, row + 1, col + 2);
+        }
+        if (isSafe_tour(board , row - 1, col + 2)) { // right
+            return tour(board, row - 1, col + 2);
+        }
+        if (isSafe_tour(board , row - 2, col + 1)) { // up
+            return tour(board, row - 2, col + 1);
+        }
+        if (isSafe_tour(board , row - 2, col - 1)) { // up
+            return tour(board, row - 2, col - 1);
+        }
+        if (isSafe_tour(board , row - 1, col - 2)) { // left
+            return tour(board, row - 1, col - 2);
+        }
+        if (isSafe_tour(board , row - 2, col + 1)) { // left
+            return tour(board, row - 2, col + 1);
+        }
+        board[row][col] = 1;
+        return false;
+    }
+
     public static void main(String[] args) {
-        int n = 5;
-        char[][] board = new char[n][n];
+        int n = 4;
+        int[][] board = new int[n][n];
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
-                board[i][j] = 'X';
+                board[i][j] = 1;
             }
         }
         // nKnights(board, 0 , 0 , n);
-        nKnights_count(board, 0, 0, n);
-        System.out.println("Number of solutions : " + count_knight);
+        // nKnights_count(board, 0, 0, n);
+        // System.out.println("Number of solutions : " + count_knight);
+        tour(board, 0, 0);
     }
 }
