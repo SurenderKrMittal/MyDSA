@@ -71,14 +71,14 @@ public class Sudoko_solver {
         boolean isempty = true;
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board.length; j++) {
-                if (board[i][j] == 0) {
+                if (board[i][j] == '.') {
                     row = i;
                     col = j;
                     isempty = false;
                     break;
                 }
             }
-            if (isempty == false) {
+            if (!isempty) {
                 break;
             }
         }

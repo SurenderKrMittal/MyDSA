@@ -134,14 +134,40 @@ public class Medium_ques {
         nKnights(board, nextRow, nextCol, knights);
     }
 
+    // n knights problem count the nuber of solution
+    static int count_knight = 0;
+    static void nKnights_count(char[][] board , int row , int col , int knights) {
+        if (knights == 0) {
+            count_knight++;
+            return;
+        }
+        if (row == board.length) {
+            return;
+        }
+        int nextRow = row;
+        int nextCol = col + 1;
+        if (nextCol == board.length) {
+            nextRow ++;
+            nextCol = 0;
+        }  
+        if(isSafe1(board , row , col)) {
+            board[row][col] = 'K';
+            nKnights_count(board, nextRow, nextCol, knights - 1);
+            board[row][col] = 'X';
+        }
+        nKnights_count(board, nextRow, nextCol, knights);
+    }
+
     public static void main(String[] args) {
-        int n = 2;
+        int n = 5;
         char[][] board = new char[n][n];
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
                 board[i][j] = 'X';
             }
         }
-        nKnights(board, 0 , 0 , n);
+        // nKnights(board, 0 , 0 , n);
+        nKnights_count(board, 0, 0, n);
+        System.out.println("Number of solutions : " + count_knight);
     }
 }
