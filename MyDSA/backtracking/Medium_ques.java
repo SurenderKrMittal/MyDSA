@@ -159,71 +159,91 @@ public class Medium_ques {
     }
 
     static boolean isSafe_tour (int[][] board , int row , int col) {
-        if (isValid_tour(board, row, col)) {
-            if (board[row][col] != 0) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    static boolean isValid_tour(int[][] board , int row , int col) {
-        if(row >= 0 && row < board.length && col >= 0 && col < board[0].length){
+        if (row >= 0 && row < board.length && col >= 0 && col < board[0].length && board[row][col] == 1) {
             return true;
         }
         return false;
     }
 
     // knight's tour
-    static boolean tour(int[][] board , int row , int col) {
-        if (!((isSafe_tour(board , row + 2, col + 1)) || (isSafe_tour(board , row + 2, col - 1)) || (isSafe_tour(board , row + 1, col + 2)) || (isSafe_tour(board , row - 1, col + 2)) || (isSafe_tour(board , row - 2, col + 1)) || (isSafe_tour(board , row - 2, col - 1)) || (isSafe_tour(board , row - 1, col - 2)) || (isSafe_tour(board , row - 2, col + 1)))) {
-             System.out.println("( " + row + " , " + col + " )");
+    static boolean tour(int[][] board , int row , int col , int[][] sol , int num) {
+        if (num == board.length * board[0].length){
             return true;
+        }
+        if (!((isSafe_tour(board , row + 2, col + 1)) || (isSafe_tour(board , row + 2, col - 1)) || (isSafe_tour(board , row + 1, col + 2)) || (isSafe_tour(board , row - 1, col + 2)) || (isSafe_tour(board , row - 2, col + 1)) || (isSafe_tour(board , row - 2, col - 1)) || (isSafe_tour(board , row - 1, col - 2)) || (isSafe_tour(board , row + 1, col - 2)))) {
+            return false;
         }
         if (board[row][col] == 0) {
             return false;
         }
-        System.out.println("( " + row + " , " + col + " )");
+        sol[row][col] = num;
         board[row][col] = 0;
         if (isSafe_tour(board , row + 2, col + 1)) { // down
-            return tour(board, row + 2, col + 1);
-        }
-        if (isSafe_tour(board , row + 2, col - 1)) { // down
-            return tour(board, row + 2, col - 1);
+            if(tour(board, row + 2, col + 1 , sol , num + 1)){
+                return true;
+            }
         }
         if (isSafe_tour(board , row + 1, col + 2)) { // right
-            return tour(board, row + 1, col + 2);
+            if(tour(board, row + 1, col + 2, sol , num + 1)){
+                return true;
+            }
         }
         if (isSafe_tour(board , row - 1, col + 2)) { // right
-            return tour(board, row - 1, col + 2);
+            if(tour(board, row - 1, col + 2, sol , num + 1)){
+                return true;
+            }
         }
         if (isSafe_tour(board , row - 2, col + 1)) { // up
-            return tour(board, row - 2, col + 1);
+            if(tour(board, row - 2, col + 1, sol , num + 1)){
+                return true;
+            }
         }
         if (isSafe_tour(board , row - 2, col - 1)) { // up
-            return tour(board, row - 2, col - 1);
+            if(tour(board, row - 2, col - 1, sol , num + 1)){
+                return true;
+            }
         }
         if (isSafe_tour(board , row - 1, col - 2)) { // left
-            return tour(board, row - 1, col - 2);
+            if(tour(board, row - 1, col - 2, sol , num + 1)){
+                return true;
+            }
         }
-        if (isSafe_tour(board , row - 2, col + 1)) { // left
-            return tour(board, row - 2, col + 1);
+        if (isSafe_tour(board , row + 1, col - 2)) { // left
+            if(tour(board, row + 1, col - 2, sol , num + 1)){
+                return true;
+            }
+        }
+        if (isSafe_tour(board , row + 2, col - 1)) { // down
+            if(tour(board, row + 2, col - 1, sol , num + 1)){
+                return true;
+            }
         }
         board[row][col] = 1;
+        sol[row][col] = -1;
         return false;
     }
 
     public static void main(String[] args) {
-        int n = 4;
+        int n = 8;
         int[][] board = new int[n][n];
+        int[][] sol = new int[n][n];
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
                 board[i][j] = 1;
+                sol[i][j] = -1;
             }
         }
         // nKnights(board, 0 , 0 , n);
         // nKnights_count(board, 0, 0, n);
         // System.out.println("Number of solutions : " + count_knight);
-        tour(board, 0, 0);
+        if (tour(board, 0, 0, sol, 0)) {
+            for (int i = 0; i < sol.length; i++) {
+                System.out.print(Arrays.toString(sol[i]));
+                System.out.println();
+            }
+        } else {
+            System.out.println("No solution found");
+            
+        }
     }
 }
