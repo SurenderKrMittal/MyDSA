@@ -99,9 +99,28 @@ public class Bit_manipulation {
         return ans;
     }
 
+    // swapping two variables without using 3rd variable
+    static void swap(int a , int b){
+        a = a ^ b;
+        b = a ^ b;
+        a = a ^ b;
+    } 
+
+    // adding 1 to integer through bit manipulation
+    static int add1(int n) {
+        // return -(~n);
+        return n | (~n);
+    }
+
+    // covert uppercase character to lowercase
+    static char convert(char ch) {
+        return (char)(ch | ' ');
+    }
+    
+
     public static void main (String[] args) {
 
-        System.out.println(fast_exponentiation(5, 3));
+        System.out.println(convert('A'));
     }
     
 }

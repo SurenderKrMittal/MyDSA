@@ -178,6 +178,8 @@ public class Medium_ques {
         }
         sol[row][col] = num;
         board[row][col] = 0;
+        
+        // the 8 ways can be in any order but it will affect the time of algo
         if (isSafe_tour(board , row + 2, col + 1)) { // down
             if(tour(board, row + 2, col + 1 , sol , num + 1)){
                 return true;
