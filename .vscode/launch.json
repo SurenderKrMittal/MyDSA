@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Practice",
+            "request": "launch",
+            "mainClass": "Practice",
+            "projectName": "MyDSA_78baf3a4"
+        },
+        {
+            "type": "java",
             "name": "Medium_ques",
             "request": "launch",
             "mainClass": "MyDSA.backtracking.Medium_ques",
